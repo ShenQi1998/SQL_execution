@@ -13,7 +13,7 @@ class MemoryCache:
         current_directory = os.path.dirname(os.path.abspath(__file__))
         with open( current_directory + "/config.json" ,'r',encoding = 'utf-8') as fp:
             self.config_data = json.load(fp)
-            print("正在读取参数>>>>>>>>>>>>>>>>>>>")
+            print("正在配置参数完成>>>>>>>>>>>>>>>>>>>")
 
     def getData(self):
         return self.config_data
@@ -25,8 +25,8 @@ class MemoryCache:
         return list(self.databaseList)
     
     def chechConfigData(self):
-        self.envirList =  self.config_data["DATABASE"].keys()
-        for database in self.config_data["DATABASE"].values() :
+        self.envirList =  self.config_data["database"].keys()
+        for database in self.config_data["database"].values() :
             if( self.databaseList == []):
                 self.databaseList = database.keys()
             else:

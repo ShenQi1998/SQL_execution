@@ -6,7 +6,7 @@ import detailed
 #   处理客户端请求
 def handle_client(client_socket , config_data , config_env , config_db):
 
-    try:
+    # try:
         request_data = client_socket.recvfrom(1024)
         request_data = request_data[0].decode('utf-8')
         print(request_data)
@@ -34,11 +34,10 @@ def handle_client(client_socket , config_data , config_env , config_db):
         # 向客户端返回响应数据
         client_socket.send(bytes(response, "utf-8"))
 
-    except Exception as e :
-        print(e)
+    # except Exception as e :
+    #     print(e)
 
-    finally:
-        # 关闭客户端连接
+    # finally:
         client_socket.close()
 
 

@@ -56,7 +56,8 @@ class MainWindow(QWidget):
             checkbox = QCheckBox(db.ljust(12, " "))
             # checkbox = QCheckBox(db)
 
-            checkbox.setCheckState(Qt.Unchecked)
+            checkbox.setCheckState(Qt.Checked)
+  
             checkbox.setFont(font)
 
             self.layout_db.addWidget(checkbox)

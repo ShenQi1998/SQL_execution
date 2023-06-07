@@ -1,5 +1,5 @@
 {
-    "DATABASE": {
+    "database": {
         "DEV":{
             "db_1": {
                 "host": "localhost",
@@ -21,6 +21,26 @@
             }
         },
         "SIT":{
+            "db_1": {
+                "host": "localhost",
+                "port": 3306,
+                "user": "root",
+                "password": "root"
+            },
+            "db_3" :{
+                "host": "localhost",
+                "port": 3306,
+                "user": "root",
+                "password": "root"
+            },
+            "db_2" :{
+                "host": "localhost",
+                "port": 3306,
+                "user": "root",
+                "password": "root"
+            }
+        },
+        "UAT":{
             "db_1": {
                 "host": "localhost",
                 "port": 3306,

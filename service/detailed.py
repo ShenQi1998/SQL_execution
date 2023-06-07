@@ -1,5 +1,6 @@
 import json
 from collections import defaultdict, OrderedDict
+import execute
 
 def handle(tranCode , Dict ,  config_data , config_env , config_db ):
     print(tranCode)
@@ -8,10 +9,11 @@ def handle(tranCode , Dict ,  config_data , config_env , config_db ):
     if(tranCode=='initialization'):
         respondDictDict = initialization(Dict , config_env , config_db )
     elif(tranCode=='commit'):
-        respondDictDict = commit(Dict)
+        respondDictDict = commit(Dict , config_data)
     result = json.dumps(respondDictDict, sort_keys=True, indent=4, separators=(',', ':'))
     return result
 
+# 初始化
 def initialization(Dict ,  config_env , config_db ):
     respondDict = defaultdict(list)
     if( not chechVersion(Dict["version"])):
@@ -22,12 +24,11 @@ def initialization(Dict ,  config_env , config_db ):
         respondDict["envirs"].extend(config_env)
         respondDict["database"].extend(config_db)
     return respondDict
-    
-        
-def commit(Dict):
-    print(Dict["SQL"])
-    print(Dict["database"])
-    print(Dict["envir"])
+
+
+# 提交  
+def commit(Dict , config_data):
+    resultList = execute.execute(Dict , config_data )
     respondDict = defaultdict(list)
     respondDict["status"] = "S"
     return respondDict

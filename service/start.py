@@ -1,5 +1,5 @@
 from config import configData
-import multiprocessing
+import multiSocket
 
 
 
@@ -13,6 +13,6 @@ if __name__ == "__main__":
     data = configData.getData()
 
     # 启动socket
-    multiprocessing.startProcess()
+    multiSocket.startProcess()
 
 
