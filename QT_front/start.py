@@ -4,7 +4,7 @@ import post
 from collections import defaultdict, OrderedDict
 
 envirs=[]
-database=[ ]
+database=[]
 
 
 def initialization():
@@ -12,10 +12,15 @@ def initialization():
         "version":"1.0",
     }
     resdata = post.requestPost(0 , data)
-    envirs.extend(resdata["envirs"])
-    database.extend(resdata["database"])
-    print(envirs)
-    print(database)
+    if(resdata["status"] == "S"  ):
+        envirs.extend(resdata["envirs"])
+        database.extend(resdata["database"])
+        print(envirs)
+        print(database)
+    elif(resdata["status"] == "F"  ):
+        msgWindow.msg( resdata["msg"] )
+
+
 
 if __name__ == '__main__':
 

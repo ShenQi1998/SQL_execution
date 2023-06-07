@@ -1,10 +1,10 @@
 import socket
-import json
 from multiprocessing import Process
+from config import configData
 import detailed
 
 #   处理客户端请求
-def handle_client(client_socket):
+def handle_client(client_socket , config_data , config_env , config_db):
 
     try:
         request_data = client_socket.recvfrom(1024)
@@ -21,7 +21,7 @@ def handle_client(client_socket):
         # jsonData = json.dumps(strData, sort_keys=True, indent=4, separators=(',', ':'))
         dictData = eval(strData)
         #业务主处理流程
-        requesr_data = detailed.handle(trancode,dictData)
+        requesr_data = detailed.handle(trancode,dictData , config_data ,config_env , config_db)
 
         # 构造响应数据
         response_start_line = "HTTP/1.1 200 OK\r\n"
@@ -43,7 +43,7 @@ def handle_client(client_socket):
 
 
 
-if __name__ == "__main__":
+def startProcess():
     print("Server Start")
     server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     server_socket.bind(("127.0.0.1",8000))
@@ -52,7 +52,8 @@ if __name__ == "__main__":
     while True:
         client_socket, client_address = server_socket.accept()
         print("[%s, %s]connect" % client_address)
-        handle_client_process = Process(target=handle_client, args=(client_socket,))
+        print(configData.getEnvir() )
+        handle_client_process = Process(target=handle_client, args=(client_socket, configData.getData()  ,configData.getEnvir() , configData.getDB () ))   # , kwargs=
         handle_client_process.start()
         client_socket.close()
 
